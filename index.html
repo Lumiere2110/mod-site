@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumiere Mods</title>
+<meta name="description" content="Minecraft 26.3 / NeoForge 用の自作Mod配布ページ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f1ea; --surface:#fffdf7; --surface2:#ebe7dc; --text:#23231f; --muted:#6b675c;
+  --line:#d8d2c2; --accent:#3f8a3a; --accent-ink:#fff; --accent-soft:#e1efd9;
+  --warn:#9a5b00; --warn-soft:#fbecd2; --info:#2c5f8a; --info-soft:#dde9f4;
+  --shadow:0 1px 0 #0000000d, 0 6px 18px -10px #0000003a;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#16171a; --surface:#1f2125; --surface2:#2a2d32; --text:#ecebe6; --muted:#a3a097;
+    --line:#34373d; --accent:#6cc163; --accent-ink:#10200e; --accent-soft:#1f3320;
+    --warn:#f0b35b; --warn-soft:#3a2c17; --info:#8ab9e3; --info-soft:#1b2a39;
+    --shadow:0 1px 0 #ffffff08, 0 8px 20px -12px #000;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16171a; --surface:#1f2125; --surface2:#2a2d32; --text:#ecebe6; --muted:#a3a097;
+  --line:#34373d; --accent:#6cc163; --accent-ink:#10200e; --accent-soft:#1f3320;
+  --warn:#f0b35b; --warn-soft:#3a2c17; --info:#8ab9e3; --info-soft:#1b2a39;
+  --shadow:0 1px 0 #ffffff08, 0 8px 20px -12px #000;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 "Noto Sans JP",system-ui,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.pix{font-family:"DotGothic16","Noto Sans JP",monospace;letter-spacing:.02em}
+
+header.top{border-bottom:1px solid var(--line);background:var(--surface)}
+header.top .wrap{display:flex;align-items:center;gap:12px;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-size:20px;text-decoration:none;color:var(--text)}
+.logo svg{width:28px;height:28px;image-rendering:pixelated}
+nav.links{margin-left:auto;display:flex;gap:4px}
+nav.links a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:14px}
+nav.links a:hover{background:var(--surface2);color:var(--text)}
+#themeBtn{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:6px;width:34px;height:34px;cursor:pointer;font-size:16px}
+
+.hero{padding:56px 0 36px}
+.hero h1{font-size:clamp(30px,6vw,46px);line-height:1.2;margin:0 0 12px}
+.hero p{color:var(--muted);margin:0;max-width:640px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:3px 10px;border-radius:999px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 18px}
+.search{flex:1 1 240px;min-width:0;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0 12px;height:40px}
+.search input{border:0;outline:0;background:transparent;color:var(--text);font:inherit;width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.card .head{display:flex;gap:14px;padding:18px 18px 0}
+.icon{flex:none;width:52px;height:52px;border-radius:8px;display:grid;place-items:center;font-size:24px;background:var(--surface2);border:1px solid var(--line)}
+.card h3{margin:0;font-size:19px;line-height:1.3}
+.card .sub{color:var(--muted);font-size:13px}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;padding:12px 18px 0}
+.tag{font-size:12px;padding:1px 8px;border-radius:4px;background:var(--surface2);color:var(--muted)}
+.tag.client{background:var(--info-soft);color:var(--info)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.card ul{margin:12px 0 0;padding:0 18px 0 36px;font-size:14px}
+.card ul li{margin:2px 0}
+.card details{margin:10px 18px 0;font-size:14px;border-top:1px dashed var(--line);padding-top:8px}
+.card summary{cursor:pointer;color:var(--accent);font-size:13px;list-style:none}
+.card summary::-webkit-details-marker{display:none}
+.card summary::before{content:"▸ ";}
+.card details[open] summary::before{content:"▾ ";}
+.card details .body{padding:6px 0 4px}
+.card details h4{margin:10px 0 4px;font-size:13px;color:var(--muted)}
+.ab{display:flex;flex-wrap:wrap;gap:4px}
+.ab span{font-size:12px;padding:1px 7px;border:1px solid var(--line);border-radius:4px}
+.ab span.dim{opacity:.5}
+.card .foot{margin-top:auto;padding:16px 18px 18px;display:flex;align-items:center;gap:10px}
+.dl{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:8px;padding:9px 16px;font-weight:700;font-size:14px;border-bottom:3px solid #0003}
+.dl:hover{filter:brightness(1.07)}
+.dl:active{transform:translateY(1px);border-bottom-width:2px}
+.meta{color:var(--muted);font-size:12px;line-height:1.4}
+.empty{color:var(--muted);text-align:center;padding:40px 0}
+
+section.block{margin:56px 0 0}
+section.block h2{font-size:24px;margin:0 0 14px}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:0;margin:0;list-style:none}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;font-size:14px}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:6px;background:var(--accent);color:var(--accent-ink);font-weight:700;margin-bottom:8px}
+.steps code,.note code{background:var(--surface2);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-all}
+.note{background:var(--warn-soft);border:1px solid color-mix(in srgb,var(--warn) 30%,transparent);border-radius:10px;padding:14px 18px;font-size:14px}
+.note ul{margin:0;padding-left:20px}
+table.compat{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tablewrap{overflow-x:auto;border-radius:10px}
+table.compat th,table.compat td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+table.compat th{background:var(--surface2);font-weight:500;color:var(--muted);font-size:13px}
+table.compat tr:last-child td{border-bottom:0}
+footer{margin:64px 0 0;border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:13px}
+
+@media (max-width:560px){
+  nav.links a.opt{display:none}
+  .hero{padding:36px 0 24px}
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo pix" href="#">
+      <svg viewBox="0 0 8 8" aria-hidden="true"><rect width="8" height="8" fill="#6b4a2b"/><rect width="8" height="3" fill="#4f9a3f"/><rect x="1" y="3" width="1" height="1" fill="#4f9a3f"/><rect x="5" y="3" width="1" height="2" fill="#4f9a3f"/><rect x="3" y="5" width="1" height="1" fill="#8a6440"/><rect x="6" y="6" width="1" height="1" fill="#8a6440"/></svg>
+      Lumiere Mods
+    </a>
+    <nav class="links">
+      <a href="#mods">Mod一覧</a>
+      <a class="opt" href="#install">入れ方</a>
+      <a class="opt" href="#notes">注意</a>
+    </nav>
+    <button id="themeBtn" type="button" title="テーマ切り替え" aria-label="テーマ切り替え">◐</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1 class="pix">自作Mod 配布所</h1>
+    <p>Minecraft に新しい遊びを足す自作Modを置いています。気になるものをダウンロードして <code>mods</code> フォルダに入れるだけで使えます。</p>
+    <div class="badges">
+      <span class="badge">Minecraft 26.3</span>
+      <span class="badge">NeoForge 26.3.0.37-beta</span>
+      <span class="badge" id="countBadge"></span>
+    </div>
+  </div>
+
+  <div id="mods" class="toolbar">
+    <label class="search">
+      <span aria-hidden="true">🔍</span>
+      <input id="q" type="search" placeholder="Mod名・機能で検索（例: 能力、ロボット）">
+    </label>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>見つかりませんでした。</p>
+
+  <section class="block" id="install">
+    <h2 class="pix">入れ方</h2>
+    <ol class="steps">
+      <li><b>NeoForge を入れる</b><br>NeoForge 公式サイトから Minecraft 26.3 用のインストーラーを入手して実行し、「Install client」を選びます。</li>
+      <li><b>Modをダウンロード</b><br>このページの「ダウンロード」ボタンから <code>.jar</code> ファイルを保存します。</li>
+      <li><b>mods フォルダに入れる</b><br><code>%appdata%\.minecraft\mods</code> に jar を入れます（フォルダがなければ作ります）。</li>
+      <li><b>起動</b><br>ランチャーで NeoForge のプロファイルを選んでプレイ。</li>
+    </ol>
+    <p class="meta" style="margin-top:12px">マルチプレイで使うときは、サーバーの <code>mods</code> フォルダにも同じjarを入れてください。「クライアント必須」と書かれたModは、遊ぶ人全員のマイクラにも必要です。</p>
+  </section>
+
+  <section class="block" id="notes">
+    <h2 class="pix">注意</h2>
+    <div class="note">
+      <ul>
+        <li><b>Hostile All と Mob Wars は同時に入れられません。</b>どちらか一方だけにしてください（両方入れると起動時にエラーになります）。</li>
+        <li>同じModの古いバージョンと新しいバージョンを両方入れないでください。更新するときは古いjarを消してから入れます。</li>
+        <li>ワールドのバックアップを取ってから試すのがおすすめです。</li>
+      </ul>
+    </div>
+    <h3 style="font-size:16px;margin:24px 0 10px">組み合わせ</h3>
+    <div class="tablewrap"><table class="compat" id="compat"></table></div>
+  </section>
+
+  <footer>
+    <div>Lumiere Mods ・ Minecraft は Mojang Studios の商標です。このサイトは Mojang / Microsoft とは関係ありません。</div>
+  </footer>
+</main>
+
+<script>
+const MODS = [
+  {
+    id:"nouryoku", name:"Nouryoku", ja:"特殊能力", icon:"✨", version:"2.4.8", file:"nouryoku-2.4.8.jar", size:"1.5 MB",
+    cat:"能力・職業", client:true,
+    summary:[
+      "最初にワールドに入ったとき、50種類以上の特殊能力から1つを選ぶ",
+      "Z / X / C / V の能力キーで技を使う。Nキーで自分の能力の説明",
+      "麻痺・凍結・眠りなどの独自の状態異常",
+      "/nouryoku で能力を変更"
+    ],
+    groups:[
+      ["移動系","疾走 跳躍 転移 脱出 鍵縄"],
+      ["戦闘系","速射 狙撃 操弾 連射 爆弾 捕食 閃光 背水 巨体 縮身 魔眼 確率 波動 糸刃 格闘 切断 人狼"],
+      ["防御系","強靭 無敵 障壁 再生 隠密 煙幕 反射 守護 適応"],
+      ["索敵系","鑑定 探知 追跡"],
+      ["特殊系","重力 分身 反響 反転 変化 複製 怪盗 時間 領域 鎖獄 影操 法律 天候 無能 商人 採掘 無効 言霊"],
+      ["Mobの能力","ゾンビ スケルトン"],
+      ["開発予定",["感染 必殺 幻夢 封印 液化 召喚 無限 霊媒 螺旋 気体 潜入 料理 変身 収集 切札 道化 律約 図書"],true]
+    ],
+    details:[
+      "能力ごとに「パッシブスキル」（いつも効く）と「スキル」（自分で使う技）がある",
+      "キーは「設定 → 操作設定 → 能力（Nouryoku）」で変更できる",
+      "/nouryoku 能力名 で直接変更も可能"
+    ]
+  },
+  {
+    id:"shokugyou", name:"Shokugyou", ja:"職業", icon:"⚔️", version:"1.5.0", file:"shokugyou-1.5.0.jar", size:"82 KB",
+    cat:"能力・職業", client:true,
+    summary:[
+      "剣士・アーチャー・白魔導士・黒魔導士・召喚士・忍者から職業を選ぶ",
+      "キャラレベル（最大100）と職業レベル（最大50）",
+      "攻撃力・魔力・回避率・運など10種類のステータスを自由に割り振り",
+      "放射状のスキルツリーで育成（Jキーでメニュー）"
+    ],
+    details:[
+      "職業の変更: ネザースターを持って右クリックを3秒長押し",
+      "クリティカル: 4%の確率でダメージ1.5倍",
+      "剣士は固有スキル「突進斬り」が使える",
+      "職業を変えてもキャラレベルや共通スキルはそのまま"
+    ]
+  },
+  {
+    id:"mahou", name:"Magic Weapons", ja:"魔法の武器", icon:"🪄", version:"1.0.0", file:"mahou-1.0.0.jar", size:"24 KB",
+    cat:"アイテム", client:false,
+    summary:[
+      "炎の剣: 攻撃した敵を5秒間燃やす",
+      "氷の剣: 鈍足IIと弱体化",
+      "雷の杖: 見ている場所に雷を落とす",
+      "風の杖: 周りの敵を打ち上げる／突風ダッシュ",
+      "回復の杖: 自分と周りのプレイヤーを回復"
+    ],
+    details:[
+      "炎の剣: ダイヤの剣＋ブレイズパウダー2＋マグマブロック2",
+      "氷の剣: ダイヤの剣＋青氷2＋雪ブロック2",
+      "杖にはクールダウンと耐久値がある"
+    ]
+  },
+  {
+    id:"programming", name:"Programming", ja:"ゲーム内プログラミング", icon:"🤖", version:"1.0.0", file:"programming-1.0.0.jar", size:"124 KB",
+    cat:"ブロック", client:true,
+    summary:[
+      "ブロック「コンピューター」と「ロボット」を追加",
+      "英語風のかんたんな言語（変数・if・while・for・関数・リスト）でプログラムを書いて実行",
+      "ロボットは前進・掘る・置く・チェストとのやり取りができる",
+      "サンプルとヘルプ付き"
+    ],
+    details:[
+      "コンピューター: 鉄インゴット×7＋板ガラス＋レッドストーン",
+      "ロボット: 鉄インゴット×6＋コンピューター＋チェスト＋鉄のツルハシ",
+      "ロボットの持ち物（18マス）はスニーク＋素手で右クリック"
+    ]
+  },
+  {
+    id:"battle", name:"Battle", ja:"1対1の対戦", icon:"🏆", version:"1.0.0", file:"battle-1.0.0.jar", size:"21 KB",
+    cat:"マルチプレイ", client:false, serverOnly:true,
+    summary:[
+      "/battle <相手> で1対1の対戦を申し込む",
+      "3秒カウントダウン・制限時間3分・相手のHPバー表示",
+      "負けても本当には死なない。終わるとHPと場所が元に戻る",
+      "/battle 戦績 で勝率を確認"
+    ],
+    details:[
+      "時間切れは残りHPの割合が多いほうの勝ち",
+      "対戦中はほかのプレイヤーとの攻撃が無効",
+      "OPでなくても使える"
+    ]
+  },
+  {
+    id:"hostileall", name:"Hostile All", ja:"全Mob敵対", icon:"💀", version:"1.4.0", file:"hostileall-1.4.0.jar", size:"13 KB",
+    cat:"Mob", client:false, conflict:"mobwars",
+    summary:[
+      "すべてのMobがプレイヤーに敵対する",
+      "倒したMobが5%の確率で爆発",
+      "ドラゴンの卵を食べられる（全回復＋強力な効果）",
+      "村人がゾンビと戦い、倒されたゾンビは村人に戻る"
+    ],
+    details:[
+      "爆発でアイテムは消えない。エンダードラゴンは爆発しない",
+      "魚・イカは自分から陸に上がらない",
+      "ネコの攻撃力は 0.5 ハート"
+    ]
+  },
+  {
+    id:"mobwars", name:"Mob Wars", ja:"Mob同士の戦争", icon:"🐺", version:"1.0.0", file:"mobwars-1.0.0.jar", size:"8 KB",
+    cat:"Mob", client:false, conflict:"hostileall",
+    summary:[
+      "Mob同士が攻撃し合う（同じ種類同士は攻撃しない）",
+      "すべてのMobがプレイヤーにも敵対し、プレイヤーを優先して狙う"
+    ],
+    details:[]
+  }
+];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nameOf = id => MODS.find(m => m.id === id).name;
+
+let cat = "すべて";
+const cats = ["すべて", ...new Set(MODS.map(m => m.cat))];
+$("#chips").innerHTML = cats.map(c => `<button class="chip" type="button" aria-pressed="${c === cat}">${esc(c)}</button>`).join("");
+$("#chips").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  cat = b.textContent;
+  document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b));
+  render();
+});
+$("#q").addEventListener("input", render);
+$("#countBadge").textContent = `${MODS.length} 個のMod`;
+
+function haystack(m){
+  return [m.name, m.ja, m.cat, ...m.summary, ...m.details, ...(m.groups || []).flatMap(g => [g[0], [].concat(g[1]).join(" ")])].join(" ").toLowerCase();
+}
+
+function card(m){
+  const tags = [`<span class="tag">${esc(m.cat)}</span>`];
+  if (m.client) tags.push(`<span class="tag client">クライアント必須</span>`);
+  if (m.serverOnly) tags.push(`<span class="tag">サーバーだけでOK</span>`);
+  if (m.conflict) tags.push(`<span class="tag warn">${esc(nameOf(m.conflict))} と同時不可</span>`);
+  const groups = (m.groups || []).map(([g, list, dim]) =>
+    `<h4>${esc(g)}</h4><div class="ab">${[].concat(list).join(" ").split(" ").map(a => `<span${dim ? ' class="dim"' : ""}>${esc(a)}</span>`).join("")}</div>`).join("");
+  const more = m.details.length || groups
+    ? `<details><summary>${groups ? "能力一覧・詳しく" : "詳しく"}</summary><div class="body">
+        ${m.details.length ? `<ul style="margin:0;padding-left:18px">${m.details.map(d => `<li>${esc(d)}</li>`).join("")}</ul>` : ""}
+        ${groups}</div></details>` : "";
+  return `<article class="card">
+    <div class="head">
+      <div class="icon" aria-hidden="true">${m.icon}</div>
+      <div><h3 class="pix">${esc(m.name)}</h3><div class="sub">${esc(m.ja)} ・ v${esc(m.version)}</div></div>
+    </div>
+    <div class="tags">${tags.join("")}</div>
+    <ul>${m.summary.map(s => `<li>${esc(s)}</li>`).join("")}</ul>
+    ${more}
+    <div class="foot">
+      <a class="dl" href="downloads/${encodeURIComponent(m.file)}" download>⬇ ダウンロード</a>
+      <div class="meta">${esc(m.file)}${m.size !== "—" ? `<br>${esc(m.size)}` : ""}</div>
+    </div>
+  </article>`;
+}
+
+function render(){
+  const q = $("#q").value.trim().toLowerCase();
+  const list = MODS.filter(m => (cat === "すべて" || m.cat === cat) && (!q || haystack(m).includes(q)));
+  $("#grid").innerHTML = list.map(card).join("");
+  $("#empty").hidden = list.length > 0;
+}
+render();
+
+// compatibility table: everything works together except Hostile All × Mob Wars
+(function(){
+  const ids = MODS.map(m => m.id);
+  const head = `<tr><th></th>${ids.map(i => `<th>${esc(nameOf(i))}</th>`).join("")}</tr>`;
+  const rows = ids.map(a => `<tr><th>${esc(nameOf(a))}</th>${ids.map(b => {
+    if (a === b) return `<td style="color:var(--muted)">—</td>`;
+    const bad = MODS.find(m => m.id === a).conflict === b;
+    return bad ? `<td style="color:var(--warn);font-weight:700">✕</td>` : `<td style="color:var(--accent)">○</td>`;
+  }).join("")}</tr>`).join("");
+  $("#compat").innerHTML = head + rows;
+})();
+
+// theme toggle (remembered per viewer)
+(function(){
+  const root = document.documentElement;
+  try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch {}
+  $("#themeBtn").addEventListener("click", () => {
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch {}
+  });
+})();
+</script>
+</body>
+</html>
