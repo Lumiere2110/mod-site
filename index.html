@@ -80,10 +80,12 @@ nav.links a:hover{background:var(--surface2);color:var(--text)}
 .ab{display:flex;flex-wrap:wrap;gap:4px}
 .ab span{font-size:12px;padding:1px 7px;border:1px solid var(--line);border-radius:4px}
 .ab span.dim{opacity:.5}
-.card .foot{margin-top:auto;padding:16px 18px 18px;display:flex;align-items:center;gap:10px}
+.card .foot{margin-top:auto;padding:16px 18px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .dl{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;border-radius:8px;padding:9px 16px;font-weight:700;font-size:14px;border-bottom:3px solid #0003}
 .dl:hover{filter:brightness(1.07)}
 .dl:active{transform:translateY(1px);border-bottom-width:2px}
+.guide{display:inline-flex;align-items:center;gap:6px;color:var(--accent);text-decoration:none;border:2px solid var(--accent);border-radius:8px;padding:7px 12px;font-weight:700;font-size:14px}
+.guide:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
 .meta{color:var(--muted);font-size:12px;line-height:1.4}
 .empty{color:var(--muted);text-align:center;padding:40px 0}
 
@@ -179,6 +181,7 @@ footer{margin:64px 0 0;border-top:1px solid var(--line);padding:24px 0 40px;colo
 const MODS = [
   {
     id:"nouryoku", name:"Nouryoku", ja:"特殊能力", icon:"✨", version:"2.9.0", file:"nouryoku-2.9.0.jar", size:"1.5 MB",
+    guide:"https://claude.ai/artifact/7cePxvh412wVXYc2AeRku6",
     cat:"能力・職業", client:true,
     summary:[
       "最初にワールドに入ったとき、50種類以上の特殊能力から1つを選ぶ",
@@ -333,6 +336,7 @@ function card(m){
     ${more}
     <div class="foot">
       <a class="dl" href="downloads/${encodeURIComponent(m.file)}" download>⬇ ダウンロード</a>
+      ${m.guide ? `<a class="guide" href="${esc(m.guide)}" target="_blank" rel="noopener">📖 教科書</a>` : ""}
       <div class="meta">${esc(m.file)}${m.size !== "—" ? `<br>${esc(m.size)}` : ""}</div>
     </div>
   </article>`;
