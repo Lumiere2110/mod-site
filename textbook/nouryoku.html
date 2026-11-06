@@ -39,6 +39,8 @@
 }
 * { box-sizing: border-box; }
 /* スクロールバー（太く・つかみやすく） */
+/* ほかの所（表示する側のページなど）で scrollbar-width・scrollbar-color が決められていると、Chrome・Edge は下の ::-webkit-scrollbar を無視するので、元に戻す */
+html, body, nav.toc { scrollbar-width: auto !important; scrollbar-color: auto !important; }
 ::-webkit-scrollbar { width: 34px; height: 34px; }
 ::-webkit-scrollbar-track { background: var(--chip); }
 ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--muted) 70%, transparent); border-radius: 17px; border: 6px solid var(--chip); min-height: 90px; }
