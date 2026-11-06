@@ -43,17 +43,17 @@
 html:not(.big-sb), body, nav.toc { scrollbar-width: auto !important; scrollbar-color: auto !important; }
 /* Firefox など ::-webkit-scrollbar の効かないブラウザ: ふつうのスクロールバーを隠して、自前の太いスクロールバーを出す（JS で .big-sb） */
 html.big-sb { scrollbar-width: none !important; }
-html.big-sb body { padding-right: 34px; }
-#bigsb { position: fixed; top: 0; right: 0; bottom: 0; width: 34px; background: var(--chip); z-index: 50; cursor: pointer; touch-action: none; }
-#bigsb div { position: absolute; left: 6px; right: 6px; min-height: 90px; border-radius: 11px; background: color-mix(in srgb, var(--muted) 70%, transparent); cursor: grab; }
+html.big-sb body { padding-right: 24px; }
+#bigsb { position: fixed; top: 0; right: 0; bottom: 0; width: 24px; background: var(--chip); z-index: 50; cursor: pointer; touch-action: none; }
+#bigsb div { position: absolute; left: 4px; right: 4px; min-height: 70px; border-radius: 8px; background: color-mix(in srgb, var(--muted) 70%, transparent); cursor: grab; }
 #bigsb div:hover, #bigsb div.drag { background: var(--accent); }
 #bigsb div.drag { cursor: grabbing; }
 @media print { #bigsb { display: none; } html.big-sb body { padding-right: 0; } }
-::-webkit-scrollbar { width: 34px; height: 34px; }
+::-webkit-scrollbar { width: 24px; height: 24px; }
 ::-webkit-scrollbar-track { background: var(--chip); }
-::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--muted) 70%, transparent); border-radius: 17px; border: 6px solid var(--chip); min-height: 90px; }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--muted) 70%, transparent); border-radius: 12px; border: 4px solid var(--chip); min-height: 70px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-nav.toc::-webkit-scrollbar { width: 22px; }
+nav.toc::-webkit-scrollbar { width: 16px; }
 nav.toc::-webkit-scrollbar-track, nav.toc::-webkit-scrollbar-thumb { border-color: var(--bg); }
 nav.toc::-webkit-scrollbar-track { background: var(--bg); }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
@@ -1983,7 +1983,7 @@ const G={};
     document.body.appendChild(track);
     const metrics = () => {
       const view = innerHeight, total = root.scrollHeight;
-      const h = Math.max(90, view * view / total);
+      const h = Math.max(70, view * view / total);
       return { view, total, h, room: view - h, max: total - view };
     };
     const update = () => {
