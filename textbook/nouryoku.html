@@ -11,7 +11,7 @@
 :root {
   --bg: #f6f1e7; --paper: #fffdf8; --ink: #2a2620; --muted: #6f675a; --line: #e2d9c6;
   --accent: #8a3b12; --accent-soft: #f3e2d3; --chip: #efe7d6;
-  --c-combat: #b4331f; --c-defense: #2f6b9a; --c-support: #6b4fa0; --c-move: #23866d;
+  --c-combat: #b4331f; --c-defense: #2f6b9a; --c-support: #6b4fa0; --c-move: #23866d; --c-search: #2f5fb3;
   --c-utility: #8a6d12; --c-enhance: #b4561f; --c-emission: #b8326e; --c-trait: #3d4a5c;
   --c-mob: #4f7a2a; --c-undev: #8c8578;
   --passive: #2f6b9a; --active: #b4331f; --info: #6f675a; --slot: #23866d;
@@ -21,7 +21,7 @@
   :root:not([data-theme="light"]) {
     --bg: #17150f; --paper: #211e17; --ink: #ece4d4; --muted: #a59b88; --line: #3a3428;
     --accent: #f0a46c; --accent-soft: #3b2a1c; --chip: #2d2920;
-    --c-combat: #f07a63; --c-defense: #7fb6e3; --c-support: #b79ce8; --c-move: #6fd0b2;
+    --c-combat: #f07a63; --c-defense: #7fb6e3; --c-support: #b79ce8; --c-move: #6fd0b2; --c-search: #8fb0f5;
     --c-utility: #e3c45a; --c-enhance: #f3a26a; --c-emission: #f27fb2; --c-trait: #a9b7cc;
     --c-mob: #9fcf6e; --c-undev: #9c9586;
     --passive: #7fb6e3; --active: #f07a63; --info: #a59b88; --slot: #6fd0b2;
@@ -31,7 +31,7 @@
 :root[data-theme="dark"] {
   --bg: #17150f; --paper: #211e17; --ink: #ece4d4; --muted: #a59b88; --line: #3a3428;
   --accent: #f0a46c; --accent-soft: #3b2a1c; --chip: #2d2920;
-  --c-combat: #f07a63; --c-defense: #7fb6e3; --c-support: #b79ce8; --c-move: #6fd0b2;
+  --c-combat: #f07a63; --c-defense: #7fb6e3; --c-support: #b79ce8; --c-move: #6fd0b2; --c-search: #8fb0f5;
   --c-utility: #e3c45a; --c-enhance: #f3a26a; --c-emission: #f27fb2; --c-trait: #a9b7cc;
   --c-mob: #9fcf6e; --c-undev: #9c9586;
   --passive: #7fb6e3; --active: #f07a63; --info: #a59b88; --slot: #6fd0b2;
@@ -231,7 +231,7 @@ mark { background: color-mix(in srgb, var(--accent) 28%, transparent); color: in
         <h3>能力とは</h3>
         <ul>
           <li>プレイヤーは<b>1人1つ</b>の能力を持つ。能力が違えば、同じキー・同じスロットでも別の技になる。</li>
-          <li>能力は<b>8つの系統</b>（戦闘系・防御系・補助系・移動系・便利系・強化系・放出系・特質系）に分かれる。ほかに、Mobが持つ能力（ゾンビ・スケルトン）と、名前だけの未開発の能力がある。</li>
+          <li>能力は<b>9つの系統</b>（戦闘系・防御系・補助系・移動系・索敵系・便利系・強化系・放出系・特質系）に分かれる。ほかに、Mobが持つ能力（ゾンビ・スケルトン）と、名前だけの未開発の能力がある。</li>
           <li>技のほとんどは<b>技スロット</b>から使う（第2章）。いつも効いている力も、技スロットに入れると入・切できる。</li>
           <li>状態異常（麻痺・凍結・眠り）は、この mod が足したエフェクト（第6章）。</li>
         </ul>
@@ -292,7 +292,7 @@ mark { background: color-mix(in srgb, var(--accent) 28%, transparent); color: in
 
     <section class="chapter" id="ch3">
       <h2><small>第3章</small>系統と能力の一覧</h2>
-      <p class="lead">能力は8つの系統に分かれる。名前を押すと、その能力の説明へ飛ぶ。</p>
+      <p class="lead">能力は9つの系統に分かれる。名前を押すと、その能力の説明へ飛ぶ。</p>
       <div class="catgrid" id="catgrid"></div>
     </section>
 
@@ -478,6 +478,7 @@ const ICONS={
 "weather/snow":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK+SURBVDhPVZO9b5t1EMc/dz/78Tt1QwiEOEgluDKqExyX8NKh7cLADBtSdxYW1AXxn7DACDMLCCHeqgxISKGVU6VpZdK8y2lsN+GxYz93DA4VfKWb7r6n70mfk3pj2Wv1RUQEdwAIKuAAjoji5oDD+UxQcHM27q8jn3z2uX/86e2J81xBAu39Y1bXdxiOjWLK+fDGMiKOigCQuPPNl1+gZvY/M0D/dMCvm12uLi9x850ml2pX+Ha1dZ5SMAMVwcxRYbLxv9rrx1xZmCMKk950KaJvga++X2PnqIeq4JMb0WQ4JAoR3d6Ar39s8bAb0NwUTwYjcMfcORkaL8/Ps9So88Ofj1lttVFRRAQVVfpPY+6s77H4Rp0onSKdCrz6wgVMFFTJRikqUwWKuTTNpRq7fwc2tjo4jvrY2WjvMDU3TyGTxnCGY8N9EtLdcYfx2BEgF6WpVF5i6+AJOKgGYeb5MpvbB+z2Y/46HrDZiXHnWZk7nXjEZueEvacDHuweMV0uAJBKLGH+xYs0+jG//L6GaoCUMjp7jXIph2D0T2O2t7aRswGJG5crF2lUF7j7k5FSVYIqV6tzNKsVTuMzUOG3u222D86wxJguZbh1bYFiMUM8HFPIpMGdoCkUBDNDVHl02OPnP+6TTQXeX6ny0fXXuV6b5Wb9FUqFDHuHPe6sPSSxCajujlqSIKqMLWFre5+RO4fdLoaDQHu/g8sEnGw2YqZcQM4ZAEdDCLgZqaC8vbhArTLD7FSZo+4JneNTbjSrlPI52ntHlHJpGpfnCUEQEUR0grKq4gb5KFC7NMtgPObeox0ePD4gHow46p3w3WqLeGzPouNglqCqik1+DRBcIBtFPJfPE4JTzGfJZjJ88N4KQRQVwRFwIYSANN98y1fevQYCjqAIlhiD0QhzI5/NIP8+jiqCgDvuRuveGv8AWDpMo3G/HYIAAAAASUVORK5CYII=",
 "weather/thunder":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALGSURBVDhPZZPfa9tlFMY/5zRLmrRrS4wtbpK6pe1CXHEkxchER28FL/VC0IFXXngh/gdeeuuNPyaighuyIbtW/IFYOuqsLciaZlmnS9ssbaa15Mc3X/N9jxffNDI88PLAC89z3vc5z5Hc/FM2O5cFVTDDzJAjFBkgZtCHo6qUS8jrb7xpL7/y2n+3AAbtVpPvvvmaVrNJ4ekimTNzYIqYgSgAV698iga94GEy4Hkdvrx8mZHjY6RPnebG8hKrKyvhywQQFx4DFZUBsdfr8Y/vU9q4xePpaYYTCUyUzEyW9bU1Pnr/Pbx266FmqhIK1Ha2uXblC9ZWV/G7PdptD0wxB812mxPpaU7P5fj4ww+4ubwEhN6oqlLbqXL92lUmkil6AfR6jlQqNTAwPhxnbHScRHyE+XMLlDYrlDdKoYBzAVuVMuknMkxMPIJzDjBUdeC4quJcgIoQi0VJjI6wVblN4AIUYHLqMarbVQ4O/+b+Xp1afQ/P9zmyp9VqUd3eod7YZ7/RYHe3xuTUFCJCBCCbm2d/r8EP338LKCYwNpEkEokCjsAZf9V3iUQigJFfKLBQLLJ1p0xERHDmePa5C+SLzxAfjuN3PX5b/4XdexWy0+t49fuMv/AO05mZMEwIRgAiqPUTJipsbv/JjzdvEY3GKBTPk50xXn2xw8adYX79+Sfu3q3gzPoTCJOrIoqgGMK9nQaHHR/P71L943e8w01WVg54920IHiwRTyToeF3ojx4DRUBMEDMW8xku5Ge5sVam55SRkxf57PqjXPoqytnFt/BdhOX1zZDcLzUzTAwMxkdH6bQ6+MOT1B40iceOkU516SZfYjaXo9Y4YOhY/P8CCMiQ4gSSyXFi/gEzp07w+SeX8I4vcv75RUSFs7NpCmdOAiAIIoqcyxdsLvtkuMqE/zJAAL/bIhKNgYHoEABmbuDB7dIG/wLJlEGD/VzxlAAAAABJRU5ErkJggg=="};
 const WEATHER=[["clear","晴天"],["rain","降雨"],["thunder","雷雨"],["lightning","落雷"],["snow","降雪"],["fog","濃霧"],["sandstorm","砂嵐"],["heat","灼熱"],["blizzard","吹雪"],["gale","暴風"]];
+const CATS=[["戦闘系","combat","武器や技で直接戦う"],["防御系","defense","攻撃を防ぐ・耐える・かわす・隠れる"],["補助系","support","味方を守る・敵を弱らせる・縛る"],["移動系","move","速く・遠くへ動く"],["索敵系","search","敵を見つける・調べる・見張る"],["便利系","utility","暮らしに役立つ"],["強化系","enhance","自分の体を強くする"],["放出系","emission","力を撃ち出す・飛ばす"],["特質系","trait","ほかにない、世界やルールそのものを変える力"]];
 const ABILITIES=[
 ["SPRINT","sprint","疾走","走り続けるほど速くなる（減速でリセット）。最大まで加速してジャンプすると大ジャンプ（加速は半分に）。移動速度低下を受けない。","移動系"],
 ["LEAP","leap","跳躍","跳躍ゲージを使って、向いている方向に跳ぶブーストジャンプ（スペースキー2回押し）。スニーク＋ジャンプで真上に約10ブロックのハイジャンプ。落下ダメージ -90%。","移動系"],
@@ -1978,16 +1979,6 @@ const G={};
 </script>
 <script>
 (function () {
-  const CATS = [
-    ['戦闘系', 'combat', '武器や技で直接戦う'],
-    ['防御系', 'defense', '攻撃を防ぐ・耐える・かわす・隠れる'],
-    ['補助系', 'support', '味方を守る・敵を弱らせる・縛る'],
-    ['移動系', 'move', '速く・遠くへ動く'],
-    ['便利系', 'utility', '調べる・見張る・暮らしに役立つ'],
-    ['強化系', 'enhance', '自分の体を強くする'],
-    ['放出系', 'emission', '力を撃ち出す・飛ばす'],
-    ['特質系', 'trait', 'ほかにない、世界やルールそのものを変える力'],
-  ];
   const KIND_LABEL = { PASSIVE: 'パッシブスキル', ACTIVE: 'スキル', INFO: '表示' };
   const KIND_COLOR = { PASSIVE: 'var(--passive)', ACTIVE: 'var(--active)', INFO: 'var(--info)' };
   const SLOT_KIND = { PRESS: '押す', TOGGLE: '入・切', HOLD: '長押し', SPECIAL: '特殊', PASSIVE: '常時' };
@@ -2136,7 +2127,7 @@ const G={};
 
   const playable = CATS.reduce((n, [cat]) => n + (byCat[cat] || []).length, 0);
   const skillCount = ABILITIES.reduce((n, a) => { const g = G[a[0]]; return n + (g ? g.skills.filter(s => s.kind !== 'INFO').length : 0); }, 0);
-  el('stats').innerHTML = [[playable, '選べる能力'], [8, '系統'], [skillCount, 'パッシブスキル・スキル'], [SKILLS.length, '技スロットの技'], [MOBPOWERS.length, '捕食のMobの力'], [(byCat['未開発'] || []).length, '未開発の能力']]
+  el('stats').innerHTML = [[playable, '選べる能力'], [CATS.length, '系統'], [skillCount, 'パッシブスキル・スキル'], [SKILLS.length, '技スロットの技'], [MOBPOWERS.length, '捕食のMobの力'], [(byCat['未開発'] || []).length, '未開発の能力']]
     .map(([n, l]) => '<div class="stat"><b>' + n + '</b><span>' + l + '</span></div>').join('');
 
   // 検索
