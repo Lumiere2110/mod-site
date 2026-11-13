@@ -218,7 +218,7 @@ mark { background: color-mix(in srgb, var(--accent) 28%, transparent); color: in
   <nav class="toc" id="toc"></nav>
   <main id="main">
     <header class="hero">
-      <div class="kicker">NOURYOKU MOD・v2.9.11</div>
+      <div class="kicker">NOURYOKU MOD・v2.9.12</div>
       <h1>能力mod 教科書</h1>
       <p>Minecraft（NeoForge）用の「能力」mod で作ったものを、ゲーム内の説明画面（Nキー）と同じ内容から、ひとつ残らず細かくまとめた本です。プレイヤーは1人1つの能力を持ち、それぞれの能力には、いつも効いている力（パッシブスキル）と、自分で使う技（スキル）があります。</p>
       <div class="stats" id="stats"></div>
@@ -1312,7 +1312,7 @@ const G={};
                             "同じ能力が続けて出ることはない。死んでも変化は続く。"),
                     active("入れ替わりの間隔", "Nキーの画面の下のボタン、または /nouryoku 変化間隔 30秒（1分・3分・5分・10分）",
                             null,
-                            "30秒・1分・3分・5分・10分 から選ぶ（初めは1分）。変えると、次の変化までの時間も最初から数え直す。"),
+                            "30秒・1分・3分・5分・10分 から選ぶ（初めは1分）。変えても次の変化までの時間は増えない（新しい間隔より長く残っていたら、新しい間隔まで縮む）。"),
                     info("画面の右上に、今の能力と次の変化までの時間（最後の5秒は赤く点滅）。",
                             "変わった瞬間、画面の真ん中に新しい能力の名前が出る。"));
             G.GRAPPLE = guide("ロープで飛び回り、ジップラインを張り、敵を引き寄せ・つなぐ。",
